@@ -1,38 +1,28 @@
 import React, { Component } from 'react';
 import './App.css';
-
+import axios from 'axios';
 
 
 class ItemComponent extends Component {
 
 
   constructor(props) {
-    super(props);
+
+    super();
+
     this.state = {
-      atkdmg: '',
-      ms: '',
-      armr: '',
-      str: '',
-      dex: '',
-      int: '',
-      hp: '',
-      hpreg: '',
-      mana: '',
-      manareg: '',
-      magres: '',
-      statres: '',
-      spellamp: '',
-
-
-
-    };
-    // this.actionHandler = this.actionHandler.bind(this);
-    // this.handleInputChange = this.handleInputChange.bind(this)
+      items: []
+    }
+      axios.get(`http://localhost:8080/Soloproject/rest/item/get` + props.match.params.id)
+      .then(res => {
+        this.setState({ 
+          items: res.data });
+        });
   }
 
   render() {
     return (
-     <div>  <h1>fkoafkofko</h1> lsdlswldllwdl
+     <div>  <h1>fkoafkofko</h1>
        
      <img className = "images" src={require("./images/hot.png")} ></img>
       </div>

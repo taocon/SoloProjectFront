@@ -24,7 +24,9 @@ class listofitems extends Component {
 
   render() {
 let items = this.state.items.map((item,i) => (
-<li><img className = "images" src={require("./images/items/" + item.itemImg + ".png")}></img></li>
+<li>
+<a href={"item/" + item.itemId}><img className = "images" src={require("./images/items/" + item.itemImg + ".png")}></img></a>
+</li>
 ))
 
     return (
@@ -33,7 +35,7 @@ let items = this.state.items.map((item,i) => (
 
       
    
-          <ul>
+          <ul className ="list-of-heroes">
         
     {items}
       </ul>
