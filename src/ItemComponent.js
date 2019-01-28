@@ -13,8 +13,9 @@ class ItemComponent extends Component {
     this.state = {
       items: []
     }
-      axios.get(`http://localhost:8080/Soloproject/rest/item/get` + props.match.params.id)
+      axios.get(`http://localhost:8080/Soloproject/rest/item/get/` + props.match.params.id)
       .then(res => {
+        
         this.setState({ 
           items: res.data });
         });
@@ -22,9 +23,13 @@ class ItemComponent extends Component {
 
   render() {
     return (
-     <div>  <h1>fkoafkofko</h1>
-       
-     <img className = "images" src={require("./images/hot.png")} ></img>
+     <div>  <h1>ItemPage</h1>
+       {console.log(this.state.items.itemName)}
+      <img className = "images" src={require("./images/items/present_lg.png")} ></img> 
+       <ul>
+    <li> {this.state.items.itemName}</li>
+    <li> {this.state.items.itemImg}</li>
+     </ul>
       </div>
      
      
