@@ -29,6 +29,8 @@ class ItemComponent extends Component {
        <ul>
     <li> {this.state.items.itemName}</li>
     <li> {this.state.items.itemImg}</li>
+
+
      </ul>
       </div>
      
