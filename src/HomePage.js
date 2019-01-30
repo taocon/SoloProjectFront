@@ -17,7 +17,7 @@ class HomePage extends Component {
 
     this.update = (event) => {
       userInput = event.target.value  //NOOOOO
-      console.log(userInput)
+     
       
       axios({
         method:'get',
@@ -25,9 +25,11 @@ class HomePage extends Component {
         responseType:'json'
       })
       .then(res => {
-        console.log("potato")
-        console.log(res.data)
-        console.log(this.state.items.itemId)
+        
+
+        console.log(this.state.items[0])
+        console.log(this.state.filteredItems)
+        this.filterItems();
         //logic to whether is should be set to something else
         if (res.data == undefined)
         {
@@ -42,7 +44,7 @@ class HomePage extends Component {
         }
       // .then(response => this.loopMovies());
       // this.loopMovies();
-
+      
       
     })
   }}
@@ -51,9 +53,9 @@ class HomePage extends Component {
 filterItems = (itemFilter) => {
   let filteredItems = this.state.items
   filteredItems = filteredItems.filter((item) => {
-    let itemName = item.itemName.toLowerCase()
-    return itemName.indexO(
-      itemFilter.toLowerCase()) !== -1
+    let itemName = item.itemName
+    return itemName.indexOf(
+      itemFilter) !== -1
   })
 }
 
@@ -65,25 +67,26 @@ filterItems = (itemFilter) => {
 
 render() {
 
+
   let items = this.state.items.map((item,i) => ( 
     <li >
       {item.itemName}
     </li>
-    
-   
-   
-
   ))
+
     return (
       <div class="home-container">
-        <h1>Welcome to the Movie Database</h1>
-        <h4>Feel free to search for a movie</h4>
+        <h1>Item Database</h1>
+       
         <input id="userInput" type="text" placeholder="Enter movie name" onChange={this.update}/>
         <ul >
         
           <li>{items}</li>
+
+      
         </ul>
-        <Items item={this.state.filteredItems} match={this.props.match} onChange={this.filterItems}/>
+        {/* <Items item={this.state.filteredItems} match={this.props.match} onChange={this.filterItems}/> */}
+        {this.state.filteredItems[1]}
       </div>
     );
   }
