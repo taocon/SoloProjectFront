@@ -15,8 +15,11 @@ class HomePage extends Component {
       filteredItems : []
     }
 
+    this.filterItems = this.filterItems.bind(this);
+
     this.update = (event) => {
       userInput = event.target.value  //NOOOOO
+      this.filterItems(userInput)
      
       
       axios({
@@ -26,9 +29,10 @@ class HomePage extends Component {
       })
       .then(res => {
         
+        
 
-        console.log(this.state.items[0])
-        console.log(this.state.filteredItems)
+        
+      
         this.filterItems();
         //logic to whether is should be set to something else
         if (res.data == undefined)
@@ -41,7 +45,16 @@ class HomePage extends Component {
             items: res.data
             
            })
+           
+        console.log(this.state.items[1].itemName.toLowerCase())
+        console.log(userInput)
+        for (let i ; i < this.state.items.size ; i++ ) {
+           if ( this.state.items[i].itemName.toLowerCase().contains(userInput)) {
+             
+             }
+           }
         }
+        
       // .then(response => this.loopMovies());
       // this.loopMovies();
       
@@ -60,7 +73,7 @@ filterItems = (itemFilter) => {
 }
 
 
-
+// MAKE ITEMNAMES AN ARRAY BY ITSELF
 
 
 
@@ -72,21 +85,36 @@ render() {
     <li >
       {item.itemName}
     </li>
-  ))
+ ))
+
+// itemsName = this.state.items.itemName.map((itemN,i) => (
+// <li>
+//   {itemN.itemName}
+// </li>
+
+
+
+
+
+// ))
 
     return (
       <div class="home-container">
         <h1>Item Database</h1>
        
-        <input id="userInput" type="text" placeholder="Enter movie name" onChange={this.update}/>
+        <input id="userInput" type="text" placeholder="Enter movie name" onChange={this.update} />
         <ul >
         
           <li>{items}</li>
+          
+     
 
       
         </ul>
         {/* <Items item={this.state.filteredItems} match={this.props.match} onChange={this.filterItems}/> */}
-        {this.state.filteredItems[1]}
+       
+        
+  
       </div>
     );
   }
