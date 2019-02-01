@@ -8,15 +8,19 @@ class HomePage extends Component {
   
 
   constructor() {
-
+    var uniqueNames
+    var filteredItems
+    var joined = ["1"]
     super();
     this.state = {
       items: [],
       filteredItems : []
     }
 
+
+
     this.update = (event) => {
-      userInput = event.target.value  //NOOOOO
+      userInput = event.target.value  
      
       
       axios({
@@ -26,12 +30,13 @@ class HomePage extends Component {
       })
       .then(res => {
         
+        
 
-        console.log(this.state.items[0])
-        console.log(this.state.filteredItems)
-        this.filterItems();
-        //logic to whether is should be set to something else
-        if (res.data == undefined)
+        
+      
+     
+
+        if (res.data === undefined)
         {
 
         }
@@ -41,26 +46,47 @@ class HomePage extends Component {
             items: res.data
             
            })
-        }
-      // .then(response => this.loopMovies());
-      // this.loopMovies();
-      
+           
+         console.log("THE LIST")
+          }
+
+    
+        for (let i =0 ; i < this.state.items.length ; i++ ) {
+
+           if ( this.state.items[i].itemName.toLowerCase().includes(userInput)) {
+
+             if (this.state.items[i].itemName !== undefined) {
+           
+               joined = this.state.filteredItems.concat(this.state.items[i].itemName);             
+                uniqueNames = joined.filter((val, id, array) => {
+                  return array.indexOf(val) == id;  
+               });
+               console.log(uniqueNames)
+              
+         
+            } else {
+        
+              this.state.items[i].itemName = null
+            }
+          
+             }
+
+
+
+
+
+           }
+        
+        
+
       
     })
   }}
 
 
-filterItems = (itemFilter) => {
-  let filteredItems = this.state.items
-  filteredItems = filteredItems.filter((item) => {
-    let itemName = item.itemName
-    return itemName.indexOf(
-      itemFilter) !== -1
-  })
-}
 
 
-
+// MAKE ITEMNAMES AN ARRAY BY ITSELF
 
 
 
@@ -72,21 +98,43 @@ render() {
     <li >
       {item.itemName}
     </li>
-  ))
+ ))
+
+// this.filteredItems = this.state.uniqueNames.map((item,i ) => (
+//   <li>
+//     {item.itemName}
+//   </li>
+//   ))
+
+// itemsName = this.state.items.itemName.map((itemN,i) => (
+// <li>
+//   {itemN.itemName}
+// </li>
+
+
+
+
+
+// ))
 
     return (
       <div class="home-container">
         <h1>Item Database</h1>
        
-        <input id="userInput" type="text" placeholder="Enter movie name" onChange={this.update}/>
+        <input id="userInput" type="text" placeholder="Enter movie name" onChange={this.update} />
         <ul >
         
           <li>{items}</li>
+          {/* <li>{filteredItems}</li> */}
+
+     
 
       
         </ul>
-        {/* <Items item={this.state.filteredItems} match={this.props.match} onChange={this.filterItems}/> */}
-        {this.state.filteredItems[1]}
+      
+       
+        
+  
       </div>
     );
   }
