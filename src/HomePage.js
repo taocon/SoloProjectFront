@@ -8,19 +8,22 @@ class HomePage extends Component {
   
 
   constructor() {
-    var uniqueNames
+    
     var filteredItems
-    var joined = ["1"]
+  
     super();
     this.state = {
       items: [],
-      filteredItems : []
+      filteredItems : [],
+      uniqueNames : []
     }
 
 
 
     this.update = (event) => {
-      userInput = event.target.value  
+      
+      userInput = event.target.value 
+    
      
       
       axios({
@@ -48,6 +51,7 @@ class HomePage extends Component {
            })
            
          console.log("THE LIST")
+         console.log(this.state.uniqueNames)
           }
 
     
@@ -55,32 +59,26 @@ class HomePage extends Component {
 
            if ( this.state.items[i].itemName.toLowerCase().includes(userInput)) {
 
-             if (this.state.items[i].itemName !== undefined) {
-           
-               joined = this.state.filteredItems.concat(this.state.items[i].itemName);             
-                uniqueNames = joined.filter((val, id, array) => {
-                  return array.indexOf(val) == id;  
-               });
-               console.log(uniqueNames)
-              
-         
-            } else {
-        
-              this.state.items[i].itemName = null
+             if (this.state.items[i].itemName !== undefined ) {
+                 this.state.uniqueNames = this.state.uniqueNames.concat(this.state.items[i].itemName);             
+                this.state.uniqueNames =this.state.uniqueNames.filter((val, id, array) => { return array.indexOf(val) == id;  });   
+                 }
+
+               }
+            
+
+          }
+
+          for (let i=0 ; i< this.state.uniqueNames.length ; i++ ) {
+            if (!this.state.uniqueNames[i].toLowerCase().includes(userInput)) {
+              this.state.uniqueNames.splice(i,1);
             }
+          }
+
           
-             }
 
-
-
-
-
-           }
-        
-        
-
-      
-    })
+         
+     })
   }}
 
 
@@ -94,22 +92,19 @@ class HomePage extends Component {
 render() {
 
 
-  let items = this.state.items.map((item,i) => ( 
-    <li >
-      {item.itemName}
-    </li>
- ))
+//   let items = this.state.items.map((item,i) => ( 
+//     <li >
+//       {item.itemName}
+//     </li>
+//  ))
 
-// this.filteredItems = this.state.uniqueNames.map((item,i ) => (
-//   <li>
-//     {item.itemName}
-//   </li>
-//   ))
 
-// itemsName = this.state.items.itemName.map((itemN,i) => (
-// <li>
-//   {itemN.itemName}
-// </li>
+
+
+
+
+
+
 
 
 
@@ -122,16 +117,18 @@ render() {
         <h1>Item Database</h1>
        
         <input id="userInput" type="text" placeholder="Enter movie name" onChange={this.update} />
-        <ul >
         
-          <li>{items}</li>
-          {/* <li>{filteredItems}</li> */}
+        
+         
+          <ul >
+    {this.state.uniqueNames.map((name) => <li>{name}</li>)}
+    </ul>
+        
 
      
 
       
-        </ul>
-      
+       
        
         
   
