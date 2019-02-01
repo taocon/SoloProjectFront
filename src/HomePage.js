@@ -50,7 +50,7 @@ class HomePage extends Component {
             
            })
            
-         console.log("THE LIST")
+         console.log(this.state.items)
          console.log(this.state.uniqueNames)
           }
 
