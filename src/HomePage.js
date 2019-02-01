@@ -47,7 +47,7 @@ class HomePage extends Component {
             
            })
            
-         console.log(this.state.items[1].itemName.toLowerCase())
+         console.log("THE LIST")
           }
 
     
@@ -62,6 +62,7 @@ class HomePage extends Component {
                   return array.indexOf(val) == id;  
                });
                console.log(uniqueNames)
+              
          
             } else {
         
@@ -99,11 +100,11 @@ render() {
     </li>
  ))
 
-let filteredItems = this.state.uniqueNames.map((item,i ) => (
-
-{item.itemName}
-
-))
+// this.filteredItems = this.state.uniqueNames.map((item,i ) => (
+//   <li>
+//     {item.itemName}
+//   </li>
+//   ))
 
 // itemsName = this.state.items.itemName.map((itemN,i) => (
 // <li>
@@ -124,7 +125,7 @@ let filteredItems = this.state.uniqueNames.map((item,i ) => (
         <ul >
         
           <li>{items}</li>
-          
+          {/* <li>{filteredItems}</li> */}
 
      
 
