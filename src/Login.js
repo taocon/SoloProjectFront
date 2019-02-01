@@ -47,9 +47,10 @@ export default class Login extends Component {
 
           <input type="name" onChange={this.handleChange}/>
           <input type ="password"  onChange={this.handleChange}/>
-          <button disabled={!this.validateForm()} type="submit">Login </button>
+          <button  type="submit">Login </button>
       
-  
+  {/* sessionStorage.setItem( "username", name); */}
+  {/* sessionStorage.getItem("username").clear; */}
       
         
         </form>
