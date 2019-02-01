@@ -8,18 +8,19 @@ class HomePage extends Component {
   
 
   constructor() {
-
+    var uniqueNames
+    var filteredItems
+    var joined = ["1"]
     super();
     this.state = {
       items: [],
       filteredItems : []
     }
 
-    this.filterItems = this.filterItems.bind(this);
+
 
     this.update = (event) => {
-      userInput = event.target.value  //NOOOOO
-      this.filterItems(userInput)
+      userInput = event.target.value  
      
       
       axios({
@@ -33,9 +34,9 @@ class HomePage extends Component {
 
         
       
-        this.filterItems();
-        //logic to whether is should be set to something else
-        if (res.data == undefined)
+     
+
+        if (res.data === undefined)
         {
 
         }
@@ -46,31 +47,42 @@ class HomePage extends Component {
             
            })
            
-        console.log(this.state.items[1].itemName.toLowerCase())
-        console.log(userInput)
-        for (let i ; i < this.state.items.size ; i++ ) {
-           if ( this.state.items[i].itemName.toLowerCase().contains(userInput)) {
-             
-             }
-           }
-        }
+         console.log(this.state.items[1].itemName.toLowerCase())
+          }
+
+    
+        for (let i =0 ; i < this.state.items.length ; i++ ) {
+
+           if ( this.state.items[i].itemName.toLowerCase().includes(userInput)) {
+
+             if (this.state.items[i].itemName !== undefined) {
+           
+               joined = this.state.filteredItems.concat(this.state.items[i].itemName);             
+                uniqueNames = joined.filter((val, id, array) => {
+                  return array.indexOf(val) == id;  
+               });
+               console.log(uniqueNames)
+         
+            } else {
         
-      // .then(response => this.loopMovies());
-      // this.loopMovies();
-      
+              this.state.items[i].itemName = null
+            }
+          
+             }
+
+
+
+
+
+           }
+        
+        
+
       
     })
   }}
 
 
-filterItems = (itemFilter) => {
-  let filteredItems = this.state.items
-  filteredItems = filteredItems.filter((item) => {
-    let itemName = item.itemName
-    return itemName.indexOf(
-      itemFilter) !== -1
-  })
-}
 
 
 // MAKE ITEMNAMES AN ARRAY BY ITSELF
@@ -86,6 +98,12 @@ render() {
       {item.itemName}
     </li>
  ))
+
+let filteredItems = this.state.uniqueNames.map((item,i ) => (
+
+{item.itemName}
+
+))
 
 // itemsName = this.state.items.itemName.map((itemN,i) => (
 // <li>
@@ -107,11 +125,12 @@ render() {
         
           <li>{items}</li>
           
+
      
 
       
         </ul>
-        {/* <Items item={this.state.filteredItems} match={this.props.match} onChange={this.filterItems}/> */}
+      
        
         
   
