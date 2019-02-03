@@ -5,6 +5,7 @@ import {
     Route,
     Link
 } from 'react-router-dom'
+
 import Listofitems from "./Listofitems.js";
 import Calculator from "./Calculator.js";
 import Accounts from "./Accounts.js";
@@ -37,7 +38,7 @@ class Nav extends Component {
             <Route path="/calc" component={Calculator} />
             <Route path="/acc" component={Accounts} />
             <Route path="/item/:id" component={ItemComponent} />
-            <Route path="/login" exact component={Login} />
+            <Route path="/login" component={Login} />
             
 
             </div>

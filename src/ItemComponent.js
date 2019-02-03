@@ -24,7 +24,6 @@ class ItemComponent extends Component {
   render() {
     return (
      <div>  <h1>ItemPage</h1>
-       {console.log(this.state.items.itemName)}
       <img className = "images" src={require("./images/items/present_lg.png")} ></img> 
        <ul>
     <li> {this.state.items.itemName}</li>

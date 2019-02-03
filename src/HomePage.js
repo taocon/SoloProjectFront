@@ -5,136 +5,65 @@ import axios from 'axios';
 var userInput;
 class HomePage extends Component {
 
-  
+
 
   constructor() {
-    var uniqueNames
+
     var filteredItems
-    var joined = ["1"]
+
     super();
     this.state = {
       items: [],
-      filteredItems : []
+      filteredItems: [],
+      uniqueNames: []
     }
 
 
 
     this.update = (event) => {
-      userInput = event.target.value  
-     
-      
+      userInput = event.target.value
       axios({
-        method:'get',
-        url:'http://localhost:8080/Soloproject/rest/item/get',
-        responseType:'json'
+        method: 'get',
+        url: 'http://localhost:8080/Soloproject/rest/item/get',
+        responseType: 'json'
       })
-      .then(res => {
-        
-        
+        .then(res => {
 
-        
-      
-     
-
-        if (res.data === undefined)
-        {
-
-        }
-        else
-        {
-          this.setState({
-            items: res.data
-            
-           })
-           
-         console.log("THE LIST")
+          if (res.data === undefined) { }
+          else {
+            this.setState({
+              items: res.data
+            })
+            console.log(this.state.items)
+            console.log(this.state.uniqueNames)
           }
 
-    
-        for (let i =0 ; i < this.state.items.length ; i++ ) {
+          for (let i = 0; i < this.state.items.length; i++) {
 
-           if ( this.state.items[i].itemName.toLowerCase().includes(userInput)) {
+            if (this.state.items[i].itemName.toLowerCase().includes(userInput)) {
 
-             if (this.state.items[i].itemName !== undefined) {
-           
-               joined = this.state.filteredItems.concat(this.state.items[i].itemName);             
-                uniqueNames = joined.filter((val, id, array) => {
-                  return array.indexOf(val) == id;  
-               });
-               console.log(uniqueNames)
-              
-         
-            } else {
-        
-              this.state.items[i].itemName = null
+              if (this.state.items[i].itemName !== undefined) {
+                this.state.uniqueNames = this.state.uniqueNames.concat(this.state.items[i].itemName);
+                this.state.uniqueNames = this.state.uniqueNames.filter((val, id, array) => { return array.indexOf(val) == id; });
+              }
             }
-          
-             }
-
-
-
-
-
-           }
-        
-        
-
-      
-    })
-  }}
-
-
-
-
-// MAKE ITEMNAMES AN ARRAY BY ITSELF
-
-
-
-
-render() {
-
-
-  let items = this.state.items.map((item,i) => ( 
-    <li >
-      {item.itemName}
-    </li>
- ))
-
-// this.filteredItems = this.state.uniqueNames.map((item,i ) => (
-//   <li>
-//     {item.itemName}
-//   </li>
-//   ))
-
-// itemsName = this.state.items.itemName.map((itemN,i) => (
-// <li>
-//   {itemN.itemName}
-// </li>
-
-
-
-
-
-// ))
-
+          }
+          for (let i = 0; i < this.state.uniqueNames.length; i++) {
+            if (!this.state.uniqueNames[i].toLowerCase().includes(userInput)) {
+              this.state.uniqueNames.splice(i, 1);
+            }
+          }
+        })
+    }
+  }
+  render() {
     return (
-      <div class="home-container">
-        <h1>Item Database</h1>
-       
-        <input id="userInput" type="text" placeholder="Enter movie name" onChange={this.update} />
+      <div>
+        <h1>Item Database Search</h1>
+        <input id="userInput" type="text" placeholder="Item search" onChange={this.update} />
         <ul >
-        
-          <li>{items}</li>
-          {/* <li>{filteredItems}</li> */}
-
-     
-
-      
+          {this.state.uniqueNames.map((name) => <li>{name}</li>)}
         </ul>
-      
-       
-        
-  
       </div>
     );
   }
