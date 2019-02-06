@@ -29,12 +29,18 @@ let items = this.state.items.map((item,i) => (
 <a href={"item/" + item.itemId}><img className = "images" src={require("./images/items/" + item.itemImg + ".png")}></img></a>
 </li>
 ))
+
     return (
       <div id = "accountButtons">
         <header >
-          <ul className ="list-of-items">       
+
+      
+   
+          <ul className ="list-of-items">
+        
     {items}
-      </ul>         
+      </ul>
+          
         </header>
       </div>
     );

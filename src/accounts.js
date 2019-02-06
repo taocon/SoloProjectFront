@@ -20,12 +20,12 @@ class Accounts extends Component {
     }
   }
 
-  handleChangeName = event => {
+  handleChange1 = event => {
     this.setState({ name: event.target.value });
 
   }
 
-  handleChangePassword = event => {
+  handleChange2 = event => {
     this.setState({ password: event.target.value });
 
   }
@@ -78,11 +78,11 @@ class Accounts extends Component {
 <ul>
         <label>
           <li> Name:</li>
-          <input type="text"  onChange={this.handleChangeName} />
+          <input type="text"  onChange={this.handleChange1} />
         </label>
         <label>
           <li> Password:</li>
-          <input type="text"  onChange={this.handleChangePassword} />
+          <input type="text"  onChange={this.handleChange2} />
         </label>
 
 <li></li>
@@ -96,8 +96,8 @@ class Accounts extends Component {
 
         <ul>
         <li><input type="text"  onChange={this.handleChangeUpd} placeholder = "id" /></li>
-        <li> <input type="text"  onChange={this.handleChangeName} placeholder = "name" /></li>
-        <li> <input type="text"  onChange={this.handleChangePassword} placeholder = "password"/></li>
+        <li> <input type="text"  onChange={this.handleChange1} placeholder = "name" /></li>
+        <li> <input type="text"  onChange={this.handleChange2} placeholder = "password"/></li>
         <li> <button type="button" onClick={this.handleSubmitUpdate}>Update</button></li>
         </ul>
       </div>
