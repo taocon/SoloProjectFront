@@ -42,7 +42,7 @@ class Accounts extends Component {
   handleSubmitAdd = () => {
     axios({
       method: "post",
-      url: "http://localhost:8080/Soloproject/rest/acc/add",
+      url: "http://51.140.34.229/Soloproject/rest/acc/add",
       data: {
         name: this.state.name,
         password: this.state.password
@@ -54,14 +54,14 @@ class Accounts extends Component {
   handleSubmitDelete = () => {
     axios({
       method: "delete",
-      url: "http://localhost:8080/Soloproject/rest/acc/del/" + this.state.id ,
+      url: "http://51.140.34.229/Soloproject/rest/acc/del/" + this.state.id ,
      });
   }
 
   handleSubmitUpdate = () => {
     axios({
       method: "put",
-      url: "http://localhost:8080/Soloproject/rest/acc/update/" + this.state.delId ,
+      url: "http://51.140.34.229/Soloproject/rest/acc/update/" + this.state.delId ,
       data: {
         name: this.state.name,
         password: this.state.password      

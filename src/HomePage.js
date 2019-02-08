@@ -21,7 +21,7 @@ class HomePage extends Component {
      userInput = event.target.value 
      axios({
         method:'get',
-        url:'http://localhost:8080/Soloproject/rest/item/get',
+        url:'http://51.140.34.229/Soloproject/rest/item/get',
      
       })
       .then(res => {

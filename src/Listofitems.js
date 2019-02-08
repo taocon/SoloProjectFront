@@ -13,7 +13,7 @@ class listofitems extends Component {
     this.state = {
       items: []
     }
-      axios.get(`http://localhost:8080/Soloproject/rest/item/get`)
+      axios.get(`http://51.140.34.229/Soloproject/rest/item/get`)
       .then(res => {
         this.setState({ 
           items: res.data });
