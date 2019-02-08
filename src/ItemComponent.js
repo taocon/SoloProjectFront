@@ -16,7 +16,7 @@ class ItemComponent extends Component {
       render : false,
       tempItemId : "",
     }
-      axios.get(`http://51.140.34.229/Soloproject/rest/item/get/` + props.match.params.id)
+      axios.get(`http://51.140.34.229:8080/Soloproject/rest/item/get/` + props.match.params.id)
       .then(res => {  
          
         console.log(res.data)     
